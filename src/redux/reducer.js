@@ -15,6 +15,7 @@ export default (state = nameInitialState, action) => {
             state.today = action.datas
             return state
         case actionType.GANK_ANDROID:
+        case actionType.GANK_IOS:
             let stateInstall = state;
             stateInstall.items = action.datas
             stateInstall.classify = action.type

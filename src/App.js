@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Header style={{  width: '100%' }}>
+        <Header style={{ width: '100%' }}>
           <div className="logo" />
           <Menu
             theme="dark"
@@ -22,14 +22,14 @@ class App extends Component {
             defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1">今日</Menu.Item>
-            <Menu.Item key="2">安卓</Menu.Item>
-            <Menu.Item key="3">苹果</Menu.Item>
-            <Menu.Item key="4">前端</Menu.Item>
-            <Menu.Item key="5">App</Menu.Item>
-            <Menu.Item key="6">拓展知识</Menu.Item>
-            <Menu.Item key="7">休息视频</Menu.Item>
-            <Menu.Item key="8">福利</Menu.Item>
+            <Menu.Item key="1"><Link to='/'>今日</Link ></Menu.Item>
+            <Menu.Item key="2"><Link to='/Android'>安卓</Link ></Menu.Item>
+            <Menu.Item key="3"><Link to='/iOS'>苹果</Link ></Menu.Item>
+            <Menu.Item key="4"><Link to='/front'>前端</Link ></Menu.Item>
+            <Menu.Item key="5"><Link to='/app'>App</Link ></Menu.Item>
+            <Menu.Item key="6"><Link to='/more'>拓展知识</Link ></Menu.Item>
+            <Menu.Item key="7"><Link to='/video'>休息视频</Link ></Menu.Item>
+            <Menu.Item key="8"><Link to='/girls'>福利</Link ></Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: '0 50px', marginTop: 64 }}>
@@ -39,7 +39,8 @@ class App extends Component {
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb> */}
           <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
-            <GankList />
+            <Route path="/:classify" component={GankList} />
+            {/* <GankList /> */}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

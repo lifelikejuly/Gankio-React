@@ -12,12 +12,13 @@ export class GankList extends Component {
     constructor(props) {
         super(props)
 
-        // this.state = {
-        //     gankItems: []
-        // }
+        this.state = {
+            classifyType: props.match.params.classify,
+        }
     }
     componentDidMount = () => {
-        this.props.getGankDatas('Android', 1)
+        let { classifyType } = this.state;
+        this.props.getGankDatas(classifyType, 1)
         // getGankClassifyDatas('Android', 1).then(res => {
         //     if (res) {
         //         this.setState({
@@ -26,6 +27,18 @@ export class GankList extends Component {
         //     }
         // })
     }
+
+    componentWillReceiveProps = (nextProps) => {
+        let nclassify = nextProps.match.params.classify
+        let { classifyType } = this.state;
+        if (nclassify !== classifyType) {
+            this.setState({
+                classifyType: nclassify
+            })
+            this.props.getGankDatas(nclassify, 1)
+        }
+    }
+
 
 
     render() {
