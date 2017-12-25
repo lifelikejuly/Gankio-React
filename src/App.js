@@ -7,10 +7,17 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import { actionGankDates } from './redux/action';
 import GankList from './component/GankList';
+import { connect } from 'react-redux';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
+
+  componentWillMount = () => {
+    this.props.loadGankDates();
+  }
+
   render() {
     return (
       <Layout>
@@ -51,5 +58,18 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  return {
+    // prop: state.prop
+  }
+}
 
-export default App;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    loadGankDates: () => {
+      dispatch(actionGankDates())
+    }
+  }
+}
+// export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App)

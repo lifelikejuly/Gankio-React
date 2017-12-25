@@ -21,7 +21,7 @@ export class TodayGank extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  
+    todayDatas: state.gank.today
 })
 
 const mapDispatchToProps = {

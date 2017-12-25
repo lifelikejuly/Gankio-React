@@ -1,5 +1,6 @@
 import * as Api from '../api/gankApi';
 import * as ActionType from '../redux/actionType';
+// all | Android | iOS | 休息视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App
 export const actionGankClassifyDatas = (classify, page) => {
     return (dispatch) => {
         return Api.getGankClassifyDatas(classify, page).then(res => {
@@ -15,6 +16,21 @@ export const actionGankClassifyDatas = (classify, page) => {
                     case '前端':
                         type = ActionType.GANK_FRONT;
                         break
+                    case '休息视频':
+                        type = ActionType.GANK_VIDEO;
+                        break
+                    case '福利':
+                        type = ActionType.GANK_GIRL;
+                        break
+                    case '拓展资源':
+                        type = ActionType.GANK_MORE;
+                        break
+                    case '瞎推荐':
+                        type = ActionType.GANK_RECON;
+                        break
+                    case 'App':
+                        type = ActionType.GANK_APP;
+                        break
                 }
                 dispatch({
                     type: type,
@@ -28,12 +44,14 @@ export const actionGankDates = () => {
     return (dispatch) => {
         return Api.getGankTime().then(res => {
             if (res) {
-                dispatch(() => {
-                    return {
-                        type: ActionType.GANK_TIME,
-                        dates: res.results
-                    }
+                let dates = res.results;
+                dispatch({
+                    type: ActionType.GANK_TIME,
+                    dates: res.results
                 })
+                if (dates) {
+                    actionGankToday(dates[0].replace('/-/g', '/'));
+                }
             }
         })
     }
@@ -42,19 +60,18 @@ export const actionGankDates = () => {
 export const actionGankToday = (date) => {
     return (dispatch) => {
         return Api.getLasterGank(date).then(res => {
-            dispatch(() => {
-                return {
-                    type: ActionType.GANK_TODAY,
-                    datas: res.results
-                }
+            let dates = res.results;
+            dispatch({
+                type: ActionType.GANK_TODAY,
+                datas: dates
             })
         })
     }
 }
 
-export const action = (type, datas) => {
-    return {
-        type: type,
-        datas: datas
-    }
-}
+// export const action = (type, datas) => {
+//     return {
+//         type: type,
+//         datas: datas
+//     }
+// }
