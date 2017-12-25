@@ -4,12 +4,16 @@ const nameInitialState = {
     items: [],
     dates: [],
     today: {},
-    classify: actionType.GANK_ANDROID
+    classify: actionType.GANK_ANDROID,
+    loading: true
 }
 export default (state = nameInitialState, action) => {
     switch (action.type) {
         case actionType.GANK_TIME:
-            return installState(state,'dates',action.dates);
+            let stateTime = state;
+            stateTime.dates = action.dates;
+            stateTime.loading = false;
+            return stateTime
         case actionType.GANK_TODAY:
             state.today = action.datas
             return state
@@ -26,13 +30,14 @@ export default (state = nameInitialState, action) => {
             stateInstall.classify = action.type
             return {
                 items: action.datas,
-                classify: action.type
+                classify: action.type,
+                loading: false
             }
         default:
             return state
     }
 }
-function installState(state,key,data) {
+function installState(state, key, data) {
     let stateInstall = state;
     stateInstall[key] = data;
     return stateInstall;

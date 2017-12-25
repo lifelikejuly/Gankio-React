@@ -5,10 +5,16 @@ const win = window;
 const reducer = combineReducers({
     gank: gankReducer
 })
-const middlewares = [thunk];
+// const middlewares = [thunk];
+// if (process.env.NODE_ENV !== 'production') {
+//     middlewares.push(require('redux-immutable-state-invariant')());
+// }
+const middleware = process.env.NODE_ENV !== 'production' ?
+  [require('redux-immutable-state-invariant').default(), thunk] :
+  [thunk];
 const storeEnhancers = compose(
-    applyMiddleware(...middlewares),
+    applyMiddleware(...middleware),
     (win && win.devToolsExtension) ? win.devToolsExtension() : (f) => f,
 );
 
-export default createStore(reducer, {}, applyMiddleware(thunk));
+export default createStore(reducer, {}, storeEnhancers);

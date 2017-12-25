@@ -43,7 +43,7 @@ export class GankList extends Component {
                     dataSource={gankItems}
                     renderItem={item => (
                         <List.Item>
-                            <Card title={item.desc} hoverable={true} onClick={this._getDetail.bind(this,item)}> <Tag color="magenta">{item.type}</Tag><Icon type="user" />{item.who}<Icon type="clock-circle" />{moment(item.publishedAt).format('YYYY-MM-DD')}</Card>
+                            <Card title={item.desc} hoverable={true} onClick={this._getDetail.bind(this, item)}> <Tag color="magenta">{item.type}</Tag><Icon type="user" />{item.who}<Icon type="clock-circle" />{moment(item.publishedAt).format('YYYY-MM-DD')}</Card>
                         </List.Item>
                     )}
                 />
@@ -74,6 +74,10 @@ export class GankList extends Component {
             case 'girls':
                 type = '福利'
                 break
+            default:
+                type = ''
+                break
+
         }
         return type;
     }
@@ -101,10 +105,13 @@ export class GankList extends Component {
             case '福利':
                 color = '福利'
                 break
+            default:
+                color = ''
+                break
         }
         return color;
     }
-    _getDetail(item){
+    _getDetail(item) {
         window.open(item.url);
     }
 }

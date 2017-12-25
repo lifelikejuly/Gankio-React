@@ -31,6 +31,9 @@ export const actionGankClassifyDatas = (classify, page) => {
                     case 'App':
                         type = ActionType.GANK_APP;
                         break
+                    default:
+                        type = ''
+                        break
                 }
                 dispatch({
                     type: type,
@@ -49,9 +52,9 @@ export const actionGankDates = () => {
                     type: ActionType.GANK_TIME,
                     dates: res.results
                 })
-                if (dates) {
-                    actionGankToday(dates[0].replace('/-/g', '/'));
-                }
+                // if (dates) {
+                //     actionGankToday(dates[0].replace('/-/g', '/'));
+                // }
             }
         })
     }
