@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { List, Card, Icon, Tag } from 'antd';
 import moment from 'moment';
+import GankCard from './gankCard';
 import { getGankClassifyDatas } from '../api/gankApi';
 import { actionGankClassifyDatas } from '../redux/action';
 export class GankList extends Component {
@@ -43,7 +44,8 @@ export class GankList extends Component {
                     dataSource={gankItems}
                     renderItem={item => (
                         <List.Item>
-                            <Card title={item.desc} hoverable={true} onClick={this._getDetail.bind(this, item)}> <Tag color="magenta">{item.type}</Tag><Icon type="user" />{item.who}<Icon type="clock-circle" />{moment(item.publishedAt).format('YYYY-MM-DD')}</Card>
+                            <GankCard item={item}/>
+                            {/* <Card title={item.desc} hoverable={true} onClick={this._getDetail.bind(this, item)}> <Tag color="magenta">{item.type}</Tag><Icon type="user" />{item.who}<Icon type="clock-circle" />{moment(item.publishedAt).format('YYYY-MM-DD')}</Card> */}
                         </List.Item>
                     )}
                 />
@@ -80,39 +82,6 @@ export class GankList extends Component {
 
         }
         return type;
-    }
-    _getClassifyColor(classifyType) {
-        let color;
-        switch (classifyType) {
-            case 'Android':
-                color = 'Android'
-                break
-            case 'iOS':
-                color = 'iOS';
-                break
-            case '前端':
-                color = '前端'
-                break
-            case 'App':
-                color = 'App'
-                break
-            case '拓展资源':
-                color = '拓展资源'
-                break
-            case '休息视频':
-                color = '休息视频'
-                break
-            case '福利':
-                color = '福利'
-                break
-            default:
-                color = ''
-                break
-        }
-        return color;
-    }
-    _getDetail(item) {
-        window.open(item.url);
     }
 }
 

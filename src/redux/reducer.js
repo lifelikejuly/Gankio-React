@@ -4,8 +4,9 @@ const nameInitialState = {
     items: [],
     dates: [],
     today: {},
+    category: [],
     classify: actionType.GANK_ANDROID,
-    loading: true
+    loading: false
 }
 export default (state = nameInitialState, action) => {
     switch (action.type) {
@@ -13,10 +14,24 @@ export default (state = nameInitialState, action) => {
             let stateTime = state;
             stateTime.dates = action.dates;
             stateTime.loading = false;
-            return stateTime
+            return {
+                dates: action.dates,
+                loading: false,
+                category: action.category,
+                today: state.today,
+                items: state.datas,
+                classify: state.type,
+            }
         case actionType.GANK_TODAY:
-            state.today = action.datas
-            return state
+            // state.today = action.today
+            return {
+                category: action.category,
+                today: action.today,
+                dates: action.dates,
+                items: state.datas,
+                classify: state.type,
+                loading: false
+            }
         case actionType.GANK_ANDROID:
         case actionType.GANK_IOS:
         case actionType.GANK_APP:
@@ -31,6 +46,9 @@ export default (state = nameInitialState, action) => {
             return {
                 items: action.datas,
                 classify: action.type,
+                dates: state.dates,
+                category: state.category,
+                today: state.today,
                 loading: false
             }
         default:

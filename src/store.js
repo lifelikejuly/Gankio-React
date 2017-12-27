@@ -1,9 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import gankReducer from './redux/reducer';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+ 
+
 const win = window;
 const reducer = combineReducers({
-    gank: gankReducer
+    gank: gankReducer,
+    routing: routerReducer
 })
 // const middlewares = [thunk];
 // if (process.env.NODE_ENV !== 'production') {
