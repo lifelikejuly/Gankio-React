@@ -6,36 +6,28 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
+  Switch,
+  withRouter
 } from 'react-router-dom';
 import { actionGankDates } from './redux/action';
 import GankList from './component/GankList';
 import { connect } from 'react-redux';
 import TodayGank from './component/TodayGank';
+import MachineGank from './component/MachineGank';
 import Header from './component/Header';
 import TimeLine from './page/TimeLine';
 const { Content, Footer } = Layout;
 class App extends Component {
 
-  componentWillMount = () => {
-    // this.props.loadGankDates();
-  }
   componentDidMount = () => {
-    // this.props.loadGankDates();
+    this.props.loadGankDates();
   }
 
-  // componentWillReceiveProps = (nextProps) => {
-  //   if(nextProps.loading !== this.props.loading){
-  //     this.setState({
-  //       loading:
-  //     })
-  //   }
-  // }
 
   render() {
     let { loading } = this.props
     return (
-      <Spin size="large" spinning={false}>
+      <Spin size="large" spinning={loading}>
         <Layout>
           <Header/>
           <Content style={{ padding: '0 50px', marginTop: 64 }}>
@@ -48,7 +40,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={TodayGank} />
               <Route path='/time' component={TimeLine}/>
-              <Route path='/time/:time' component={TodayGank}/>
+              <Route path='/timeMachine/:date' component={MachineGank}/>
               <Route path="/:classify" component={GankList} />
             </Switch>
             </div>
@@ -65,12 +57,11 @@ const mapStateToProps = (state, ownProps) => ({
     loading: state.gank.loading
 })
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   return {
-//     loadGankDates: () => {
-//       dispatch(actionGankDates())
-//     }
-//   }
-// }
-export default App;
-// export default connect(mapStateToProps, null)(App)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    loadGankDates: () => {
+      dispatch(actionGankDates())
+    }
+  }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

@@ -16,7 +16,7 @@ export class TodayGank extends Component {
 
   }
   componentDidMount = () => {
-    this.props.loadGankDates();
+    // this.props.loadGankDates();
   }
 
 
@@ -49,13 +49,11 @@ const mapStateToProps = (state) => ({
   category: state.gank.category
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    loadGankDates: () => {
-      dispatch(actionGankDates())
-    }
-  }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return {
+   
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodayGank)
+export default connect(mapStateToProps, null)(TodayGank)
 

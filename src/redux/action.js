@@ -82,6 +82,19 @@ export const actionGankToday = (date) => {
     }
 }
 
+export const actionGankMachine = (date) => {
+    return (dispatch) => {
+        return Api.getLasterGank(date).then(res => {
+            let dates = res.results;
+            dispatch({
+                type: ActionType.GANK_TIMEMACHINE,
+                today: res.results,
+                category: res.category
+            })
+        })
+    }
+}
+
 // export const action = (type, datas) => {
 //     return {
 //         type: type,

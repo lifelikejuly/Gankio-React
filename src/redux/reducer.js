@@ -6,7 +6,7 @@ const nameInitialState = {
     today: {},
     category: [],
     classify: actionType.GANK_ANDROID,
-    loading: false
+    loading: true
 }
 export default (state = nameInitialState, action) => {
     switch (action.type) {
@@ -28,6 +28,15 @@ export default (state = nameInitialState, action) => {
                 category: action.category,
                 today: action.today,
                 dates: action.dates,
+                items: state.datas,
+                classify: state.type,
+                loading: false
+            }
+        case actionType.GANK_TIMEMACHINE:
+            return {
+                today: action.today,
+                category: action.category,
+                dates: state.dates,
                 items: state.datas,
                 classify: state.type,
                 loading: false

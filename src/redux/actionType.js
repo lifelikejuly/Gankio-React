@@ -9,3 +9,4 @@ export const GANK_GIRL = 'GANK/GIRL';
 export const GANK_MORE= 'GANK/MORE';
 export const GANK_RECON = 'GANK/RECON';
 export const GANK_APP = 'GANK/APP';
+export const GANK_TIMEMACHINE = 'GANK/MACHINE';
