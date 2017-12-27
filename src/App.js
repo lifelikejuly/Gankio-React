@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import { Layout, Menu, Breadcrumb, Spin } from 'antd';
+import { Layout, Menu, Breadcrumb, Spin, BackTop } from 'antd';
 import {
   BrowserRouter as Router,
   Route,
@@ -10,7 +10,7 @@ import {
   withRouter
 } from 'react-router-dom';
 import { actionGankDates } from './redux/action';
-import GankList from './component/GankList';
+import GankList from './page/GankList';
 import { connect } from 'react-redux';
 import TodayGank from './component/TodayGank';
 import MachineGank from './component/MachineGank';
@@ -28,8 +28,12 @@ class App extends Component {
     let { loading } = this.props
     return (
       <Spin size="large" spinning={loading}>
+        {/* <BackTop>
+          <div className="ant-back-top-inner">UP</div>
+        </BackTop> */}
+        <BackTop />
         <Layout>
-          <Header/>
+          <Header />
           <Content style={{ padding: '0 50px', marginTop: 64 }}>
             {/* <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -37,12 +41,12 @@ class App extends Component {
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb> */}
             <div style={{ background: '#fff', padding: 24, minHeight: 380 }}>
-            <Switch>
-              <Route exact path="/" component={TodayGank} />
-              <Route path='/time' component={TimeLine}/>
-              <Route path='/timeMachine/:date' component={MachineGank}/>
-              <Route path="/:classify" component={GankList} />
-            </Switch>
+              <Switch>
+                <Route exact path="/" component={TodayGank} />
+                <Route path='/time' component={TimeLine} />
+                <Route path='/timeMachine/:date' component={MachineGank} />
+                <Route path="/:classify" component={GankList} />
+              </Switch>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
@@ -54,7 +58,7 @@ class App extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => ({
-    loading: state.gank.loading
+  loading: state.gank.loading
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {

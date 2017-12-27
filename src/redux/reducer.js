@@ -6,21 +6,23 @@ const nameInitialState = {
     today: {},
     category: [],
     classify: actionType.GANK_ANDROID,
-    loading: true
+    loading: true,
+    gankLoding: false,
 }
 export default (state = nameInitialState, action) => {
     switch (action.type) {
         case actionType.GANK_TIME:
-            let stateTime = state;
-            stateTime.dates = action.dates;
-            stateTime.loading = false;
+            // let stateTime = state;
+            // stateTime.dates = action.dates;
+            // stateTime.loading = false;
             return {
                 dates: action.dates,
                 loading: false,
                 category: action.category,
                 today: state.today,
-                items: state.datas,
-                classify: state.type,
+                items: state.items,
+                classify: state.classify,
+                gankLoding:false
             }
         case actionType.GANK_TODAY:
             // state.today = action.today
@@ -28,18 +30,20 @@ export default (state = nameInitialState, action) => {
                 category: action.category,
                 today: action.today,
                 dates: action.dates,
-                items: state.datas,
-                classify: state.type,
-                loading: false
+                items: state.items,
+                classify: state.classify,
+                loading: false,
+                gankLoding:false
             }
         case actionType.GANK_TIMEMACHINE:
             return {
                 today: action.today,
                 category: action.category,
                 dates: state.dates,
-                items: state.datas,
-                classify: state.type,
-                loading: false
+                items: state.items,
+                classify: state.classify,
+                loading: false,
+                gankLoding:false
             }
         case actionType.GANK_ANDROID:
         case actionType.GANK_IOS:
@@ -50,15 +54,30 @@ export default (state = nameInitialState, action) => {
         case actionType.GANK_FRONT:
         case actionType.GANK_GIRL:
             let stateInstall = state;
-            stateInstall.items = action.datas
-            stateInstall.classify = action.type
+            if(stateInstall.classify == action.type){
+                stateInstall.items.push(...action.datas)
+            }else{
+                stateInstall.items = action.datas
+                stateInstall.classify = action.type
+            }
             return {
-                items: action.datas,
-                classify: action.type,
+                items: stateInstall.items,
+                classify: stateInstall.classify,
                 dates: state.dates,
-                category: state.category,
+                category: stateInstall.category,
                 today: state.today,
-                loading: false
+                loading: false,
+                gankLoding:false
+            }
+        case actionType.LOADING:
+            return{
+                today: state.today,
+                category: state.category,
+                dates: state.dates,
+                items: state.items,
+                classify: state.classify,
+                loading: false,
+                gankLoding:true
             }
         default:
             return state

@@ -3,6 +3,7 @@ import * as ActionType from '../redux/actionType';
 // all | Android | iOS | 休息视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App
 export const actionGankClassifyDatas = (classify, page) => {
     return (dispatch) => {
+        dispatch(actionLoading())
         return Api.getGankClassifyDatas(classify, page).then(res => {
             if (res) {
                 let type;
@@ -94,7 +95,11 @@ export const actionGankMachine = (date) => {
         })
     }
 }
-
+export const actionLoading = () => {
+    return{
+        type: ActionType.LOADING
+    }
+}
 // export const action = (type, datas) => {
 //     return {
 //         type: type,

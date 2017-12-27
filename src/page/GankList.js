@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { List, Card, Icon, Tag } from 'antd';
 import moment from 'moment';
-import GankCard from './gankCard';
+import { Card, Button } from 'antd';
+import GankCard from '../component/gankCard';
+import GirlCard from '../component/GirlsCard';
 import { getGankClassifyDatas } from '../api/gankApi';
 import { actionGankClassifyDatas } from '../redux/action';
 export class GankList extends Component {
@@ -12,22 +13,24 @@ export class GankList extends Component {
         super(props)
 
         this.state = {
+            page: 1,
             classifyType: props.match.params.classify,
         }
     }
     // all | Android | iOS | 休息视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App
     componentDidMount = () => {
-        let { classifyType } = this.state;
-        this.props.getGankDatas(this._getClassify(classifyType), 1)
+        let { classifyType, page } = this.state;
+        this.props.getGankDatas(this._getClassify(classifyType), page)
 
     }
 
     componentWillReceiveProps = (nextProps) => {
         let nclassify = nextProps.match.params.classify
-        let { classifyType } = this.state;
+        let { classifyType, page } = this.state;
         if (nclassify !== classifyType) {
             this.setState({
-                classifyType: nclassify
+                classifyType: nclassify,
+                page: 1
             })
             this.props.getGankDatas(this._getClassify(nclassify), 1)
         }
@@ -36,19 +39,15 @@ export class GankList extends Component {
 
 
     render() {
-        let { gankItems } = this.props
+        let { gankItems, classifyType ,loading} = this.props
         return (
             <div>
-                <List
-                    grid={{ gutter: 16, column: 2 }}
-                    dataSource={gankItems}
-                    renderItem={item => (
-                        <List.Item>
-                            <GankCard item={item}/>
-                            {/* <Card title={item.desc} hoverable={true} onClick={this._getDetail.bind(this, item)}> <Tag color="magenta">{item.type}</Tag><Icon type="user" />{item.who}<Icon type="clock-circle" />{moment(item.publishedAt).format('YYYY-MM-DD')}</Card> */}
-                        </List.Item>
-                    )}
-                />
+                {
+                    this._getClassify(this.state.classifyType) == '福利' ? <GirlCard items={gankItems} /> : <GankCard items={gankItems} />
+                }
+                <Card loading={loading} style={{ width: '100%' }} onClick={this._loadMore.bind(this)}>
+                    <span style={{ width: '100%',fontSize: '25px', textAlign: 'center', display: 'block' }} >加载更多</span>
+                </Card>
             </div>
         )
     }
@@ -83,17 +82,25 @@ export class GankList extends Component {
         }
         return type;
     }
+    _loadMore() {
+        let { classifyType, page } = this.state;
+        this.setState({
+            page: page + 1
+        })
+        this.props.getGankDatas(classifyType, page + 1);
+    }
 }
 
 const mapStateToProps = (state) => ({
-    gankItems: state.gank.items
+    gankItems: state.gank.items,
+    loading: state.gank.gankLoding
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getGankDatas: (classify, page) => {
             dispatch(actionGankClassifyDatas(classify, page))
-        }
+        },
     }
 }
 

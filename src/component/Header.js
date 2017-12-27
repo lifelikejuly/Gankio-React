@@ -22,8 +22,9 @@ export default function GankHeader(){
               <Menu.Item key="7"><Link to='/video'><span>休息视频</span></Link ></Menu.Item>
               <Menu.Item key="8"><Link to='/girls'><span>福利</span></Link ></Menu.Item>
               <Menu.Item key="9"><Link to='/time'><span>时光机</span></Link ></Menu.Item>
-              {/* <Button type="primary"  onClick={toGitHub.bind(this)} shape="circle" icon="github" size={25} style={{ float: 'right' ,fontSize: 25,cursor:'pointer', lineHeight: '63px'}}/> */}
-              <Icon type="github"  onClick={toGitHub.bind(this)} style={{ float: 'right' ,fontSize: 25,cursor:'pointer', lineHeight: '63px'}}/>
+              <Button type="primary"  href='https://github.com/yuhaocan/React-Gank' target='_blank' shape="circle" icon="github" size={63} style={{ float: 'right' ,marginTop: '15px'}}/>
+              {/* <Icon type="github" href='https://github.com/yuhaocan/React-Gank' onClick={toGitHub.bind(this)} style={{ float: 'right' ,fontSize: 25,cursor:'pointer', lineHeight: '63px'}}> */}
+              {/* </Icon> */}
             </Menu>
         </Header>
     )

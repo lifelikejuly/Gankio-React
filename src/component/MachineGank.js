@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import {actionGankMachine} from '../redux/action';
 import DayGank from '../component/TodayGank';
 export class MachineGank extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+  // static propTypes = {
+  //   prop: PropTypes
+  // }
   componentDidMount = () => {
     let date = this.props.match.params.date;
     date = date.replace(/-/g,'/');

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Collapse, Card, Tag, Icon } from 'antd';
 import moment from 'moment';
 import GankCard from './gankCard';
+import GirlCard from './GirlsCard';
 import { actionGankDates } from '../redux/action';
 const Panel = Collapse.Panel;
 
@@ -27,11 +28,9 @@ export class TodayGank extends Component {
         {
           category.map((itemCate, index) => {
             return <Panel header={itemCate} key={index}>
-              {
-                todayDatas[itemCate].map((item) => {
-                  return <GankCard  key={index} item={item}/>
-                })
-              }
+            {
+                itemCate == '福利' ? <GirlCard key={index} items={todayDatas[itemCate]}/> : <GankCard key={index} items={todayDatas[itemCate]} vertical={true}/>
+            }
             </Panel>
           })
         }
@@ -51,7 +50,7 @@ const mapStateToProps = (state) => ({
 
 // const mapDispatchToProps = (dispatch, ownProps) => {
 //   return {
-   
+
 //   }
 // }
 

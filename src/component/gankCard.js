@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
-import { Card, Icon, Tag } from 'antd';
+import { List, Card, Icon, Tag } from 'antd';
 import moment from 'moment';
-export default function GankCard({ item }) {
+export default function GankCard({ items , vertical = false}) {
 
     return (
-        <Card title={item.desc} hoverable={true} onClick={_getDetail.bind(this,item)}>
-            <Tag color={_getClassifyColor(item.type)}>{item.type}</Tag>
-            <Icon type="user" style={{marginLeft:'10px'}}/>
-            <span style={{marginLeft:'5px'}}>{item.who}</span>
-            <Icon type="clock-circle" style={{marginLeft:'10px'}}/>
-            <span style={{marginLeft:'5px'}}> {moment(item.publishedAt).format('YYYY-MM-DD')}</span>
-        </Card>
+        <List
+            grid={(vertical ? null : { gutter: 16, column: 2 })}
+            dataSource={items}
+            renderItem={item => (
+                card(item)
+            )}
+        />
+
     )
+    function card( item ) {
+        return (
+            <List.Item>
+                <Card title={item.desc} hoverable={true} onClick={_getDetail.bind(this, item)}>
+                    <Tag color={_getClassifyColor(item.type)}>{item.type}</Tag>
+                    <Icon type="user" style={{ marginLeft: '10px' }} />
+                    <span style={{ marginLeft: '5px' }}>{item.who}</span>
+                    <Icon type="clock-circle" style={{ marginLeft: '10px' }} />
+                    <span style={{ marginLeft: '5px' }}> {moment(item.publishedAt).format('YYYY-MM-DD')}</span>
+                </Card>
+            </List.Item>
+        )
+    }
     function _getClassifyColor(classifyType) {
         let color;
         switch (classifyType) {
