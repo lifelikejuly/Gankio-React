@@ -45,7 +45,7 @@ export class GankList extends Component {
                 {
                     this._getClassify(this.state.classifyType) == '福利' ? <GirlCard items={gankItems} /> : <GankCard items={gankItems} />
                 }
-                <Card loading={loading} style={{ width: '100%' }} onClick={this._loadMore.bind(this)}>
+                <Card loading={loading} style={{ width: '100%',cursor: 'pointer' }} onClick={this._loadMore.bind(this)}>
                     <span style={{ width: '100%',fontSize: '25px', textAlign: 'center', display: 'block' }} >加载更多</span>
                 </Card>
             </div>
@@ -87,7 +87,7 @@ export class GankList extends Component {
         this.setState({
             page: page + 1
         })
-        this.props.getGankDatas(classifyType, page + 1);
+        this.props.getGankDatas(this._getClassify(classifyType), page + 1);
     }
 }
 

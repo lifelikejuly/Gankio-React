@@ -11,7 +11,7 @@ export default function GankHeader(){
               theme="dark"
               mode="horizontal"
               defaultSelectedKeys={['1']}
-              style={{ lineHeight: '63px' }}
+              style={{ lineHeight: '63px', float: 'left' }}
             >
               <Menu.Item key="1"><Link to='/'><span>最新</span></Link ></Menu.Item>
               <Menu.Item key="2"><Link to='/Android'><span>安卓</span></Link ></Menu.Item>
@@ -22,10 +22,11 @@ export default function GankHeader(){
               <Menu.Item key="7"><Link to='/video'><span>休息视频</span></Link ></Menu.Item>
               <Menu.Item key="8"><Link to='/girls'><span>福利</span></Link ></Menu.Item>
               <Menu.Item key="9"><Link to='/time'><span>时光机</span></Link ></Menu.Item>
-              <Button type="primary"  href='https://github.com/yuhaocan/React-Gank' target='_blank' shape="circle" icon="github" size={63} style={{ float: 'right' ,marginTop: '15px'}}/>
-              {/* <Icon type="github" href='https://github.com/yuhaocan/React-Gank' onClick={toGitHub.bind(this)} style={{ float: 'right' ,fontSize: 25,cursor:'pointer', lineHeight: '63px'}}> */}
-              {/* </Icon> */}
-            </Menu>
+              {/* <Menu.Item style={{float: 'right'}}>
+                
+             </Menu.Item> */}
+             </Menu>
+             <a href='https://github.com/yuhaocan/React-Gank' target="_blank"><Icon type="github" style={{fontSize:'25px',float:'right',lineHeight: '63px', }}/> </a>
         </Header>
     )
     function toGitHub(){
