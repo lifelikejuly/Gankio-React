@@ -16,7 +16,7 @@ export default function GankCard({ items , vertical = false}) {
     function card( item ) {
         return (
             <List.Item>
-                <Card title={item.desc} hoverable={true} onClick={_getDetail.bind(this, item)}>
+                <Card className="card-text-overflow " title={item.desc} hoverable={true} onClick={_getDetail.bind(this, item)}>
                     <Tag color={_getClassifyColor(item.type)}>{item.type}</Tag>
                     <Icon type="user" style={{ marginLeft: '10px' }} />
                     <span style={{ marginLeft: '5px' }}>{item.who}</span>
