@@ -14,8 +14,8 @@ import GankList from './page/GankList';
 import { connect } from 'react-redux';
 import TodayGank from './component/TodayGank';
 import MachineGank from './component/MachineGank';
-// import Header from './component/Header';
 import TimeLine from './page/TimeLine';
+
 const { Content, Footer, Sider, Header } = Layout;
 class App extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class App extends Component {
           </Sider>
           <Layout style={{ marginLeft: 200}}>
             <Header style={{ background:"#fff" , padding: 0 }}>
-              <a href='https://github.com/yuhaocan/React-Gank' target="_blank"><Icon type="github" style={{ fontSize: '25px', float: 'right', lineHeight: '63px', }} /> </a>
+              <a href='https://github.com/yuhaocan/React-Gank' target="_blank"><Icon type="github" style={{ fontSize: '25px', float: 'right', lineHeight: '63px',marginRight: '20px' }} /> </a>
             </Header>
             <Content style={{ margin:"24px 16px 0", overflow: "initial"}}>
               {/* <Breadcrumb style={{ margin: '16px 0' }}>
@@ -82,7 +82,7 @@ class App extends Component {
               </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-              <span>ReactGank ©2017 UI by Ant Design & API by GankIo & Power by React</span>
+              <span>ReactGank ©{new Date().getFullYear()} UI by Ant Design & API by GankIo & Power by React</span>
             </Footer>
           </Layout>
         </Layout>

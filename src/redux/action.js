@@ -49,15 +49,10 @@ export const actionGankDates = () => {
         return Api.getGankTime().then(res => {
             if (res) {
                 let dates = res.results;
-                // dispatch({
-                //     type: ActionType.GANK_TIME,
-                //     dates: res.results
-                // })
                 if (dates) {
                     let date = dates[0].replace(/-/g, '/');
                     actionGankToday(date);
                     Api.getLasterGank(date).then(res => {
-                        // let dates = res.results;
                         dispatch({
                             type: ActionType.GANK_TODAY,
                             today: res.results,
@@ -100,9 +95,3 @@ export const actionLoading = () => {
         type: ActionType.LOADING
     }
 }
-// export const action = (type, datas) => {
-//     return {
-//         type: type,
-//         datas: datas
-//     }
-// }

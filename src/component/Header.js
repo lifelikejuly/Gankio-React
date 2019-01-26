@@ -7,7 +7,7 @@ export default function GankHeader() {
     return (
         <Header style={{ background: '#fff', padding: 0 }}>
             <div className="logo" />
-            <a href='https://github.com/yuhaocan/React-Gank' target="_blank"><Icon type="github" style={{ fontSize: '25px', float: 'right', lineHeight: '63px', }} /> </a>
+            <a href='https://github.com/yuhaocan/React-Gank' target="_blank"><Icon type="github" style={{ fontSize: '25px', float: 'right', lineHeight: '63px',marginRight: "20px" }} /> </a>
         </Header>
     )
     function toGitHub() {
